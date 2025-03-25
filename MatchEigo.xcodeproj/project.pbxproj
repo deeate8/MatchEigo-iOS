@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4016D6E14820467346408556 /* Pods_MatchEigoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5672E24A7941B481A726F377 /* Pods_MatchEigoTests.framework */; };
-		D0C3B1D2A57BC48A9B9894A5 /* Pods_MatchEigo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B32B86C91D3B6C4708C0B06 /* Pods_MatchEigo.framework */; };
-		D780CFF401FC2B9C012BA553 /* Pods_MatchEigo_MatchEigoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94CC1D61FE1641A4EC93E9E /* Pods_MatchEigo_MatchEigoUITests.framework */; };
+		18C9E70A2D9169EF009612D1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 18C9E7092D9169EF009612D1 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,15 +44,6 @@
 		18048AD22D8D307900FCD7F3 /* MatchEigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchEigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18048AE82D8D307B00FCD7F3 /* MatchEigoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatchEigoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18048AF22D8D307B00FCD7F3 /* MatchEigoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatchEigoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C89BBD7E51F42DC0A3EAF30 /* Pods-MatchEigo-MatchEigoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchEigo-MatchEigoUITests.debug.xcconfig"; path = "Target Support Files/Pods-MatchEigo-MatchEigoUITests/Pods-MatchEigo-MatchEigoUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		400A3E263AEA2D2859B19D83 /* Pods-MatchEigoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchEigoTests.debug.xcconfig"; path = "Target Support Files/Pods-MatchEigoTests/Pods-MatchEigoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5672E24A7941B481A726F377 /* Pods_MatchEigoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatchEigoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		59730DF0FC2DE451E9B35A05 /* Pods-MatchEigoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchEigoTests.release.xcconfig"; path = "Target Support Files/Pods-MatchEigoTests/Pods-MatchEigoTests.release.xcconfig"; sourceTree = "<group>"; };
-		7B32B86C91D3B6C4708C0B06 /* Pods_MatchEigo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatchEigo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB3611A3B4D9D3C01874EACA /* Pods-MatchEigo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchEigo.release.xcconfig"; path = "Target Support Files/Pods-MatchEigo/Pods-MatchEigo.release.xcconfig"; sourceTree = "<group>"; };
-		C0972694DBBA612669620C31 /* Pods-MatchEigo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchEigo.debug.xcconfig"; path = "Target Support Files/Pods-MatchEigo/Pods-MatchEigo.debug.xcconfig"; sourceTree = "<group>"; };
-		C94CC1D61FE1641A4EC93E9E /* Pods_MatchEigo_MatchEigoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatchEigo_MatchEigoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA2129FD75FF9C71C4E01EE /* Pods-MatchEigo-MatchEigoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchEigo-MatchEigoUITests.release.xcconfig"; path = "Target Support Files/Pods-MatchEigo-MatchEigoUITests/Pods-MatchEigo-MatchEigoUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,7 +51,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"/Localized: LaunchScreen.storyboard",
-				"/Localized: Main.storyboard",
 				Assets.xcassets,
 				Info.plist,
 			);
@@ -96,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0C3B1D2A57BC48A9B9894A5 /* Pods_MatchEigo.framework in Frameworks */,
+				18C9E70A2D9169EF009612D1 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +92,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4016D6E14820467346408556 /* Pods_MatchEigoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D780CFF401FC2B9C012BA553 /* Pods_MatchEigo_MatchEigoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,8 +112,6 @@
 				18048AEB2D8D307B00FCD7F3 /* MatchEigoTests */,
 				18048AF52D8D307B00FCD7F3 /* MatchEigoUITests */,
 				18048AD32D8D307900FCD7F3 /* Products */,
-				D1BB1B118BC92A73613B6957 /* Pods */,
-				951359E52FE6ED08C4DBAC57 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,29 +125,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		951359E52FE6ED08C4DBAC57 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7B32B86C91D3B6C4708C0B06 /* Pods_MatchEigo.framework */,
-				C94CC1D61FE1641A4EC93E9E /* Pods_MatchEigo_MatchEigoUITests.framework */,
-				5672E24A7941B481A726F377 /* Pods_MatchEigoTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D1BB1B118BC92A73613B6957 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C0972694DBBA612669620C31 /* Pods-MatchEigo.debug.xcconfig */,
-				BB3611A3B4D9D3C01874EACA /* Pods-MatchEigo.release.xcconfig */,
-				3C89BBD7E51F42DC0A3EAF30 /* Pods-MatchEigo-MatchEigoUITests.debug.xcconfig */,
-				DCA2129FD75FF9C71C4E01EE /* Pods-MatchEigo-MatchEigoUITests.release.xcconfig */,
-				400A3E263AEA2D2859B19D83 /* Pods-MatchEigoTests.debug.xcconfig */,
-				59730DF0FC2DE451E9B35A05 /* Pods-MatchEigoTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -171,11 +132,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18048AFB2D8D307B00FCD7F3 /* Build configuration list for PBXNativeTarget "MatchEigo" */;
 			buildPhases = (
-				B99C2CEBE644EB332024AD84 /* [CP] Check Pods Manifest.lock */,
 				18048ACE2D8D307900FCD7F3 /* Sources */,
 				18048ACF2D8D307900FCD7F3 /* Frameworks */,
 				18048AD02D8D307900FCD7F3 /* Resources */,
-				3EE88101151D2E0DA31B9619 /* [CP] Embed Pods Frameworks */,
 				1869DDC02D912A7F00037A4B /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -186,8 +145,6 @@
 				18048AD42D8D307900FCD7F3 /* MatchEigo */,
 			);
 			name = MatchEigo;
-			packageProductDependencies = (
-			);
 			productName = MatchEigo;
 			productReference = 18048AD22D8D307900FCD7F3 /* MatchEigo.app */;
 			productType = "com.apple.product-type.application";
@@ -196,7 +153,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18048B002D8D307B00FCD7F3 /* Build configuration list for PBXNativeTarget "MatchEigoTests" */;
 			buildPhases = (
-				AD60D24A5BD0FA5B14D43E34 /* [CP] Check Pods Manifest.lock */,
 				18048AE42D8D307B00FCD7F3 /* Sources */,
 				18048AE52D8D307B00FCD7F3 /* Frameworks */,
 				18048AE62D8D307B00FCD7F3 /* Resources */,
@@ -218,11 +174,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18048B032D8D307B00FCD7F3 /* Build configuration list for PBXNativeTarget "MatchEigoUITests" */;
 			buildPhases = (
-				65591411134544F0A1A87B6A /* [CP] Check Pods Manifest.lock */,
 				18048AEE2D8D307B00FCD7F3 /* Sources */,
 				18048AEF2D8D307B00FCD7F3 /* Frameworks */,
 				18048AF02D8D307B00FCD7F3 /* Resources */,
-				D055EC5174A03AE796945568 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +224,7 @@
 			mainGroup = 18048AC92D8D307900FCD7F3;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				18C9E7082D9169EF009612D1 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 18048AD32D8D307900FCD7F3 /* Products */;
@@ -306,109 +261,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3EE88101151D2E0DA31B9619 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MatchEigo/Pods-MatchEigo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MatchEigo/Pods-MatchEigo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MatchEigo/Pods-MatchEigo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		65591411134544F0A1A87B6A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MatchEigo-MatchEigoUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AD60D24A5BD0FA5B14D43E34 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MatchEigoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B99C2CEBE644EB332024AD84 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MatchEigo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D055EC5174A03AE796945568 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MatchEigo-MatchEigoUITests/Pods-MatchEigo-MatchEigoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MatchEigo-MatchEigoUITests/Pods-MatchEigo-MatchEigoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MatchEigo-MatchEigoUITests/Pods-MatchEigo-MatchEigoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18048ACE2D8D307900FCD7F3 /* Sources */ = {
@@ -450,7 +302,6 @@
 /* Begin XCBuildConfiguration section */
 		18048AFC2D8D307B00FCD7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0972694DBBA612669620C31 /* Pods-MatchEigo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -480,7 +331,6 @@
 		};
 		18048AFD2D8D307B00FCD7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB3611A3B4D9D3C01874EACA /* Pods-MatchEigo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -629,7 +479,6 @@
 		};
 		18048B012D8D307B00FCD7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 400A3E263AEA2D2859B19D83 /* Pods-MatchEigoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -649,7 +498,6 @@
 		};
 		18048B022D8D307B00FCD7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59730DF0FC2DE451E9B35A05 /* Pods-MatchEigoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -669,7 +517,6 @@
 		};
 		18048B042D8D307B00FCD7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C89BBD7E51F42DC0A3EAF30 /* Pods-MatchEigo-MatchEigoUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -687,7 +534,6 @@
 		};
 		18048B052D8D307B00FCD7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCA2129FD75FF9C71C4E01EE /* Pods-MatchEigo-MatchEigoUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -743,6 +589,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18C9E7082D9169EF009612D1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.54.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18C9E7092D9169EF009612D1 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18C9E7082D9169EF009612D1 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18048ACA2D8D307900FCD7F3 /* Project object */;
 }
