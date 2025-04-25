@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -18,6 +19,13 @@ class ViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
-
+    
+    
+    @IBAction func startToeicGame(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let toeicVC = storyboard.instantiateViewController(withIdentifier: "ToeicGameController") as? ToeicGameController {
+            toeicVC.modalPresentationStyle = .fullScreen
+            present(toeicVC, animated: true)
+        }
+    }
 }
-

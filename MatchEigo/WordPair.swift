@@ -8,7 +8,7 @@
 import Foundation
 
 struct WordPair {
-    let question: String
-    let answer: String
-    let isMatch: Bool
+    var question: String
+    var answer: String
+    var isMatch: Bool
 }

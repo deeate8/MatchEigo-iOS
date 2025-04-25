@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1895A8BD2DAF4F030042B6EC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1895A8BC2DAF4F030042B6EC /* Lottie */; };
+		18A0EA092DBA2890007155A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18A0E9F22DBA2890007155A7 /* GoogleService-Info.plist */; };
+		18C9AD512DB8CE01007111AA /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 18C9AD502DB8CE01007111AA /* FirebaseCore */; };
+		18C9AD532DB9EB72007111AA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 18C9AD522DB9EB72007111AA /* FirebaseFirestore */; };
+		18C9AD552DBA0BDE007111AA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 18C9AD542DBA0BDE007111AA /* FirebaseFirestore */; };
 		18C9E70A2D9169EF009612D1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 18C9E7092D9169EF009612D1 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +49,7 @@
 		18048AD22D8D307900FCD7F3 /* MatchEigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchEigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18048AE82D8D307B00FCD7F3 /* MatchEigoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatchEigoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18048AF22D8D307B00FCD7F3 /* MatchEigoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatchEigoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A0E9F22DBA2890007155A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -85,6 +91,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C9E70A2D9169EF009612D1 /* RealmSwift in Frameworks */,
+				18C9AD532DB9EB72007111AA /* FirebaseFirestore in Frameworks */,
+				18C9AD512DB8CE01007111AA /* FirebaseCore in Frameworks */,
+				18C9AD552DBA0BDE007111AA /* FirebaseFirestore in Frameworks */,
+				1895A8BD2DAF4F030042B6EC /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,9 +118,11 @@
 		18048AC92D8D307900FCD7F3 = {
 			isa = PBXGroup;
 			children = (
+				18A0E9F22DBA2890007155A7 /* GoogleService-Info.plist */,
 				18048AD42D8D307900FCD7F3 /* MatchEigo */,
 				18048AEB2D8D307B00FCD7F3 /* MatchEigoTests */,
 				18048AF52D8D307B00FCD7F3 /* MatchEigoUITests */,
+				18C9AD4F2DB8CE01007111AA /* Frameworks */,
 				18048AD32D8D307900FCD7F3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,6 +135,13 @@
 				18048AF22D8D307B00FCD7F3 /* MatchEigoUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		18C9AD4F2DB8CE01007111AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +244,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				18C9E7082D9169EF009612D1 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				1895A8BB2DAF4F030042B6EC /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				18C9AD4E2DB8CB76007111AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 18048AD32D8D307900FCD7F3 /* Products */;
@@ -243,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A0EA092DBA2890007155A7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +613,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1895A8BB2DAF4F030042B6EC /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
+		18C9AD4E2DB8CB76007111AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
 		18C9E7082D9169EF009612D1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -602,6 +640,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1895A8BC2DAF4F030042B6EC /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1895A8BB2DAF4F030042B6EC /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+		18C9AD502DB8CE01007111AA /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18C9AD4E2DB8CB76007111AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		18C9AD522DB9EB72007111AA /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18C9AD4E2DB8CB76007111AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		18C9AD542DBA0BDE007111AA /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18C9AD4E2DB8CB76007111AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		18C9E7092D9169EF009612D1 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 18C9E7082D9169EF009612D1 /* XCRemoteSwiftPackageReference "realm-swift" */;
