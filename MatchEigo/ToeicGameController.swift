@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import FirebaseCore
 import RealmSwift
+import FirebaseFirestore
 
 class ToeicGameController: UIViewController {
     
@@ -21,37 +23,68 @@ class ToeicGameController: UIViewController {
     
     @IBOutlet weak var answerStackView: UIStackView!
     
-    
     // MARK: - Properties
     private let realm = try! Realm()
     private var currentUser: UserScore?
     
-    // English-Japanese word pairs (TOEIC 0-300 level)
-    var wordPairs = [
-        ("Hello", "こんにちは"),
-        ("Goodbye", "さようなら"),
-        ("Thank you", "ありがとう"),
-        ("Yes", "はい"),
-        ("No", "いいえ"),
-        ("Book", "本"),
-        ("Pen", "ペン"),
-        ("School", "学校"),
-        ("Water", "水"),
-        ("Food", "食べ物"),
-        ("Money", "お金"),
-        ("Time", "時間"),
-        ("Day", "日"),
-        ("Night", "夜"),
-        ("Friend", "友達"),
-        ("Family", "家族"),
-        ("House", "家"),
-        ("Car", "車"),
-        ("Train", "電車"),
-        ("Phone", "電話")
-    ]
-    
+    let db = Firestore.firestore()
+    var wordPairs = [("", "")]
     var selectedQuestionButton: UIButton?
     var selectedAnswerButton: UIButton?
+    
+    func fetchWordPairs() {
+            db.collection("wordPairs").getDocuments { [weak self] snapshot, error in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    print("Firestore error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    print("No documents found")
+                    return
+                }
+                
+                self.wordPairs = documents.compactMap { doc in
+                    guard let english = doc["english"] as? String,
+                          let japanese = doc["japanese"] as? String else {
+                        print("Invalid document format")
+                        return nil
+                    }
+                    return (english, japanese)
+                }
+                
+                DispatchQueue.main.async {
+                    self.startNewRound()
+                }
+            }
+        }
+    
+    // English-Japanese word pairs (TOEIC 0-300 level)
+//    var wordPairs = [
+//        ("Hello", "こんにちは"),
+//        ("Goodbye", "さようなら"),
+//        ("Thank you", "ありがとう"),
+//        ("Yes", "はい"),
+//        ("No", "いいえ"),
+//        ("Book", "本"),
+//        ("Pen", "ペン"),
+//        ("School", "学校"),
+//        ("Water", "水"),
+//        ("Food", "食べ物"),
+//        ("Money", "お金"),
+//        ("Time", "時間"),
+//        ("Day", "日"),
+//        ("Night", "夜"),
+//        ("Friend", "友達"),
+//        ("Family", "家族"),
+//        ("House", "家"),
+//        ("Car", "車"),
+//        ("Train", "電車"),
+//        ("Phone", "電話")
+//    ]
+    
     var score = 0 {
         didSet { scoreLabel.text = "Score: \(score)" }
     }
@@ -66,6 +99,7 @@ class ToeicGameController: UIViewController {
         super.viewDidLoad()
         setupButtonAppearance()
         startNewRound()
+        fetchWordPairs()
     }
     
     // MARK: - Game Setup
@@ -94,6 +128,10 @@ class ToeicGameController: UIViewController {
         selectedQuestionButton = nil
         selectedAnswerButton = nil
         
+        guard wordPairs.count >= 4 else {
+                print("Not available")
+                return
+            }
         // Select 4 random pairs
         currentRoundPairs = Array(wordPairs.shuffled().prefix(4))
         
@@ -101,18 +139,18 @@ class ToeicGameController: UIViewController {
         let englishWords = currentRoundPairs.map { $0.0 }.shuffled()
         let japaneseWords = currentRoundPairs.map { $0.1 }.shuffled()
         
-        // Update question buttons (English)
-        for (index, button) in questionsStackView.arrangedSubviews.enumerated() {
-            (button as? UIButton)?.setTitle(englishWords[index], for: .normal)
-            button.backgroundColor = .systemBlue
-            (button as? UIButton)?.isEnabled = true
+        for (index, view) in questionsStackView.arrangedSubviews.enumerated() {
+                guard let button = view as? UIButton, index < englishWords.count else { continue }
+                button.setTitle(englishWords[index], for: .normal)
+                button.backgroundColor = .systemBlue
+                button.isEnabled = true
         }
         
-        // Update answer buttons (Japanese)
-        for (index, button) in answerStackView.arrangedSubviews.enumerated() {
-            (button as? UIButton)?.setTitle(japaneseWords[index], for: .normal)
-            button.backgroundColor = .systemBlue
-            (button as? UIButton)?.isEnabled = true
+        for (index, view) in answerStackView.arrangedSubviews.enumerated() {
+                guard let button = view as? UIButton, index < japaneseWords.count else { continue }
+                button.setTitle(japaneseWords[index], for: .normal)
+                button.backgroundColor = .systemBlue
+                button.isEnabled = true
         }
     }
     
