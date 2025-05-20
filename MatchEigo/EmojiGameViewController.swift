@@ -100,19 +100,15 @@ class EmojiGameViewController: UIViewController {
             button.titleLabel?.numberOfLines = 0
             button.titleLabel?.lineBreakMode = .byWordWrapping
             button.titleLabel?.adjustsFontSizeToFitWidth = true
-            button.titleLabel?.minimumScaleFactor = 0.5  // Can
-//            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            button.titleLabel?.minimumScaleFactor = 0.5
             button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         }
     }
     func addTapGestures() {
-            // Add taps to question labels (emojis)
             for case let label as UILabel in questionsStackView.arrangedSubviews {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(questionTapped(_:)))
                 label.addGestureRecognizer(tap)
             }
-            
-            // Add taps to answer labels (words)
             for case let label as UILabel in answersStackView.arrangedSubviews {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(answerTapped(_:)))
                 label.addGestureRecognizer(tap)
@@ -129,14 +125,10 @@ class EmojiGameViewController: UIViewController {
     }
     
     func startNewRound() {
-            // Reset for new round
         matchedPairs = 0
         selectedQuestionLabel = nil
-            
-            // Select 4 random pairs
         currentRoundPairs = Array(emojiPairs.shuffled().prefix(4))
             
-            // Separate and shuffle questions and answers
         let questions = currentRoundPairs.map { $0.0 }.shuffled()
         let answers = currentRoundPairs.map { $0.1 }.shuffled()
         
@@ -173,17 +165,12 @@ class EmojiGameViewController: UIViewController {
             
             checkForMatch()
         }
-    
-//TODO: highlight the color
-    
-    
+
     @objc func answerTapped(_ sender: UITapGestureRecognizer) {
             guard let label = sender.view as? UILabel else { return }
             
-            // Deselect previous
             selectedAnswerLabel?.layer.borderWidth = 0
             
-            // Select new
             label.layer.borderColor = UIColor.systemYellow.cgColor
             label.layer.borderWidth = 4
             selectedAnswerLabel = label
@@ -305,11 +292,6 @@ class EmojiGameViewController: UIViewController {
         
         // Start fresh 5 rounds
         setupEmojiGame()
-        
-        // Optional: Shuffle all word pairs for new session
         emojiPairs.shuffle()
     }
-    
-    
-    // TODO: saving data in Realm
 }

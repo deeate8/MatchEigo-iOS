@@ -62,7 +62,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.78919018756642201" green="1" blue="0.6310177284657712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.45000082013250048" green="0.99393028020858765" blue="0.55460728825378469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="n00-V7-IDx" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="11" id="3ts-al-tBY"/>
                             <constraint firstItem="n00-V7-IDx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="62q-lC-jKm"/>
@@ -226,7 +226,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7WQ-Bl-xlU">
-                                        <rect key="frame" x="145.66666666666666" y="0.0" width="90" height="34.333333333333336"/>
+                                        <rect key="frame" x="111.33333333333331" y="0.0" width="90" height="34.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggv-oI-pGT">
+                                        <rect key="frame" x="230.66666666666666" y="0.0" width="39.333333333333343" height="34.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -360,6 +366,7 @@
                         <outlet property="questionsStackView" destination="JXZ-ds-Myx" id="4Cv-4h-6jS"/>
                         <outlet property="roundLabel" destination="jXX-wY-Atp" id="XoM-dQ-c90"/>
                         <outlet property="scoreLabel" destination="7WQ-Bl-xlU" id="OBT-MA-EyY"/>
+                        <outlet property="timerLabel" destination="ggv-oI-pGT" id="bYv-Q2-Z6u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chy-3Z-Nok" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -421,30 +428,41 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGw-qa-oVj">
+                                <rect key="frame" x="12" y="250" width="369" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aP0-cc-h5j"/>
                         <color key="backgroundColor" red="1" green="0.93447300149972534" blue="0.6176658067269889" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="aP0-cc-h5j" firstAttribute="trailing" secondItem="Rp0-AF-Wc8" secondAttribute="trailing" constant="10" id="8Ia-xG-1FO"/>
+                            <constraint firstItem="lGw-qa-oVj" firstAttribute="top" secondItem="Rp0-AF-Wc8" secondAttribute="bottom" constant="23" id="9JQ-GZ-SuG"/>
                             <constraint firstItem="OaG-EP-ahv" firstAttribute="leading" secondItem="aP0-cc-h5j" secondAttribute="leading" constant="12" id="CTj-xU-AHd"/>
                             <constraint firstItem="OaG-EP-ahv" firstAttribute="top" secondItem="Rp0-AF-Wc8" secondAttribute="bottom" constant="52" id="F1h-OU-6sb"/>
                             <constraint firstItem="ycH-VD-6xt" firstAttribute="trailing" secondItem="Rp0-AF-Wc8" secondAttribute="trailing" id="Je3-Dy-k5q"/>
                             <constraint firstItem="Rp0-AF-Wc8" firstAttribute="top" secondItem="aP0-cc-h5j" secondAttribute="top" constant="73" id="K3F-XL-DBp"/>
                             <constraint firstItem="aP0-cc-h5j" firstAttribute="bottom" secondItem="gQ7-vi-UzK" secondAttribute="bottom" constant="136.66999999999999" id="Qaj-o3-acF"/>
                             <constraint firstItem="Rp0-AF-Wc8" firstAttribute="leading" secondItem="aP0-cc-h5j" secondAttribute="leading" constant="10" id="VBK-xl-Zkh"/>
+                            <constraint firstItem="OaG-EP-ahv" firstAttribute="top" secondItem="lGw-qa-oVj" secondAttribute="bottom" constant="8" symbolic="YES" id="bBD-x8-Ahn"/>
                             <constraint firstItem="aP0-cc-h5j" firstAttribute="trailing" secondItem="gQ7-vi-UzK" secondAttribute="trailing" constant="88.670000000000002" id="cEI-BR-gM2"/>
                             <constraint firstItem="ycH-VD-6xt" firstAttribute="top" secondItem="OaG-EP-ahv" secondAttribute="bottom" constant="53" id="djA-Fn-XeU"/>
                             <constraint firstItem="ycH-VD-6xt" firstAttribute="leading" secondItem="Rp0-AF-Wc8" secondAttribute="leading" id="fYt-zt-Vlq"/>
                             <constraint firstItem="gQ7-vi-UzK" firstAttribute="leading" secondItem="aP0-cc-h5j" secondAttribute="leading" constant="89" id="gow-49-GsN"/>
                             <constraint firstItem="gQ7-vi-UzK" firstAttribute="top" secondItem="ycH-VD-6xt" secondAttribute="bottom" constant="177.33000000000001" id="iFO-7c-xjl"/>
+                            <constraint firstItem="lGw-qa-oVj" firstAttribute="leading" secondItem="aP0-cc-h5j" secondAttribute="leading" constant="12" id="ncl-a9-IFz"/>
                             <constraint firstItem="ycH-VD-6xt" firstAttribute="top" secondItem="BBq-ad-Xsp" secondAttribute="top" constant="395" id="qR0-zy-ocO"/>
                             <constraint firstItem="aP0-cc-h5j" firstAttribute="trailing" secondItem="OaG-EP-ahv" secondAttribute="trailing" constant="12" id="uCX-Jt-7ul"/>
+                            <constraint firstItem="aP0-cc-h5j" firstAttribute="trailing" secondItem="lGw-qa-oVj" secondAttribute="trailing" constant="12" id="yAe-Wd-ca0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emojiLabel" destination="ycH-VD-6xt" id="rp4-JA-gcI"/>
                         <outlet property="motivationalLabel" destination="OaG-EP-ahv" id="h3n-WX-ufQ"/>
                         <outlet property="scoreLabel" destination="Rp0-AF-Wc8" id="wHJ-wk-Gpe"/>
+                        <outlet property="timeLabel" destination="lGw-qa-oVj" id="3nx-le-08Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEg-Q3-syM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

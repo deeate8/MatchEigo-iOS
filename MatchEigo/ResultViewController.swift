@@ -23,16 +23,38 @@ class ResultViewController: UIViewController {
     
     var finalScore = 0
     var gameViewController: UIViewController?
+    var totalTime: Double = 0
+    
+    @IBOutlet weak var timeLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTimeDisplay()
         scoreLabel.text = "Your Score: \(finalScore)"
         setEmojiForScore()
         setupConfetti()
         showMotivationalComment()
-        
     }
+    
+    func setupTimeDisplay() {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .positional
+            formatter.zeroFormattingBehavior = .pad
+            
+            timeLabel.text = "Time: \(formatter.string(from: totalTime) ?? "0:00")"
+            
+            if let bestTime = TimerService.shared.getBestTime() {
+                if totalTime < bestTime {
+                    timeLabel.textColor = .systemGreen
+                    timeLabel.text! += " 🏆 New Best!"
+                } else {
+                    timeLabel.text! += " (Best: \(formatter.string(from: bestTime) ?? "0:00"))"
+                }
+            }
+        }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         animationView.play()
@@ -90,7 +112,7 @@ class ResultViewController: UIViewController {
             let randomComment = comments.randomElement() ?? "Good job!"
             motivationalLabel.text = randomComment
             
-            // Add animation
+            // Animation
             motivationalLabel.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             UIView.animate(withDuration: 0.5,
                            delay: 0,
@@ -204,8 +226,6 @@ class ResultViewController: UIViewController {
             
             window.rootViewController = homeVC
     }
-    
-    
 }
 
 

@@ -31,6 +31,11 @@ class ToeicGameController: UIViewController {
     var wordPairs = [("", "")]
     var selectedQuestionButton: UIButton?
     var selectedAnswerButton: UIButton?
+    let timerService = TimerService.shared
+    var elapsedTime: Double = 0
+    var timer: Timer?
+    
+    @IBOutlet weak var timerLabel: UILabel!
     
     func fetchWordPairs() {
             db.collection("wordPairs").getDocuments { [weak self] snapshot, error in
@@ -61,29 +66,7 @@ class ToeicGameController: UIViewController {
             }
         }
     
-    // English-Japanese word pairs (TOEIC 0-300 level)
-//    var wordPairs = [
-//        ("Hello", "こんにちは"),
-//        ("Goodbye", "さようなら"),
-//        ("Thank you", "ありがとう"),
-//        ("Yes", "はい"),
-//        ("No", "いいえ"),
-//        ("Book", "本"),
-//        ("Pen", "ペン"),
-//        ("School", "学校"),
-//        ("Water", "水"),
-//        ("Food", "食べ物"),
-//        ("Money", "お金"),
-//        ("Time", "時間"),
-//        ("Day", "日"),
-//        ("Night", "夜"),
-//        ("Friend", "友達"),
-//        ("Family", "家族"),
-//        ("House", "家"),
-//        ("Car", "車"),
-//        ("Train", "電車"),
-//        ("Phone", "電話")
-//    ]
+
     
     var score = 0 {
         didSet { scoreLabel.text = "Score: \(score)" }
@@ -127,12 +110,15 @@ class ToeicGameController: UIViewController {
         matchedPairs = 0
         selectedQuestionButton = nil
         selectedAnswerButton = nil
-        
+        if currentRound == 1 {
+            timerService.startRound()
+            startLiveTimer()
+        }
         guard wordPairs.count >= 4 else {
                 print("Not available")
                 return
             }
-        // Select 4 random pairs
+
         currentRoundPairs = Array(wordPairs.shuffled().prefix(4))
         
         // Separate and shuffle questions (English) and answers (Japanese)
@@ -146,11 +132,15 @@ class ToeicGameController: UIViewController {
                 button.isEnabled = true
         }
         
-        for (index, view) in answerStackView.arrangedSubviews.enumerated() {
-                guard let button = view as? UIButton, index < japaneseWords.count else { continue }
-                button.setTitle(japaneseWords[index], for: .normal)
-                button.backgroundColor = .systemBlue
-                button.isEnabled = true
+        // Update answer buttons (Japanese)
+        for (index, button) in answerStackView.arrangedSubviews.enumerated() {
+            guard let button = button as? UIButton,
+                  index < japaneseWords.count else { continue }
+            
+            button.setTitle(japaneseWords[index], for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .systemBlue
+            button.isEnabled = true
         }
     }
     
@@ -159,37 +149,27 @@ class ToeicGameController: UIViewController {
         // Deselect if same button tapped again
         if sender == selectedQuestionButton {
             selectedQuestionButton?.backgroundColor = .systemBlue
-
             selectedQuestionButton = nil
-            
             return
         }
-        
-        
         
         // Deselect previous selection
         selectedQuestionButton?.backgroundColor = .systemBlue
         selectedQuestionButton = sender
         sender.backgroundColor = .systemYellow
-        
-        // Check for match if both selections are made
         checkForMatch()
     }
     
     @IBAction func answerTapped(_ sender: UIButton) {
-        // Deselect if same button tapped again
         if sender == selectedAnswerButton {
             selectedAnswerButton?.backgroundColor = .systemBlue
             selectedAnswerButton = nil
             return
         }
         
-        // Deselect previous selection
         selectedAnswerButton?.backgroundColor = .systemBlue
         selectedAnswerButton = sender
         sender.backgroundColor = .systemOrange
-        
-        // Check for match if both selections are made
         checkForMatch()
     }
     
@@ -204,7 +184,6 @@ class ToeicGameController: UIViewController {
         
         // Check if this is a correct pair
         if currentRoundPairs.contains(where: { $0 == (selectedEnglish, selectedJapanese) }) {
-            // Correct match
             score += 1
             matchedPairs += 1
             questionButton.isEnabled = false
@@ -214,7 +193,6 @@ class ToeicGameController: UIViewController {
                 answerButton.backgroundColor = .systemGreen
             })
             
-            // Clear selections
             selectedQuestionButton = nil
             selectedAnswerButton = nil
             
@@ -225,7 +203,7 @@ class ToeicGameController: UIViewController {
                 }
             }
         } else {
-            // Incorrect match - deduct points (minimum 0)
+            // Incorrect match - deduct points
             score = max(0, score - 1)
             
             UIView.animate(withDuration: 0.3, animations: {
@@ -244,19 +222,22 @@ class ToeicGameController: UIViewController {
     }
     
     func checkGameProgress() {
-        if currentRound < 5 {
-            currentRound += 1
-            startNewRound()
-        } else {
-            // Game over, show results
-            showResults()
+            if currentRound < 5 {
+                currentRound += 1
+                startNewRound()
+            } else {
+                // Game over, show results
+                let totalTime = timerService.endRound()
+                timer?.invalidate()
+                showResult(with: totalTime)
+            }
         }
-    }
     
-    func showResults() {
+    func showResult(with totalTime: Double) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let resultsVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
             resultsVC.finalScore = score
+            resultsVC.totalTime = totalTime
             resultsVC.gameViewController = self
             resultsVC.modalPresentationStyle = .fullScreen
             present(resultsVC, animated: true)
@@ -265,10 +246,25 @@ class ToeicGameController: UIViewController {
     
     // MARK: - Navigation
     @IBAction func backTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Leave Game?", message: "Your progress will be saved.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Leave Game?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Stay", style: .cancel))
         alert.addAction(UIAlertAction(title: "Leave", style: .default) { _ in
-            self.dismiss(animated: true)
+            let transition = CATransition()
+            
+            //            3D Block animation
+            transition.type = CATransitionType(rawValue: "cube")
+            transition.subtype = .fromLeft
+            transition.duration = 0.8
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            self.view.window?.layer.add(transition, forKey: nil)
+            self.tabBarController?.selectedIndex = 0
+            
+            if let window = self.view.window {
+                window.layer.add(transition, forKey: kCATransition)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBar") as! UITabBarController
+                window.rootViewController = tabBarController
+            }
         })
         present(alert, animated: true)
     }
@@ -280,11 +276,25 @@ class ToeicGameController: UIViewController {
         matchedPairs = 0
         selectedQuestionButton = nil
         selectedAnswerButton = nil
-        
-        // Start fresh 5 rounds
+        timer?.invalidate()
         startNewRound()
-        
-        // Optional: Shuffle all word pairs for new session
         wordPairs.shuffle()
     }
+    
+    func startLiveTimer() {
+        timer?.invalidate()
+        elapsedTime = 0
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.elapsedTime += 0.1
+            self.updateTimerLabel()
+        }
+    }
+    func updateTimerLabel() {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .positional
+            formatter.zeroFormattingBehavior = .pad
+            timerLabel.text = formatter.string(from: elapsedTime)
+ }
 }

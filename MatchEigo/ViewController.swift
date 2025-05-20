@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         let vc = storyboard?.instantiateViewController(identifier: "emojiGame") as! EmojiGameViewController
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-    }
+}
     
     
     @IBAction func startToeicGame(_ sender: Any) {
@@ -30,7 +30,8 @@ class ViewController: UIViewController {
             toeicVC.modalPresentationStyle = .fullScreen
             present(toeicVC, animated: true)
         }
-    }
+}
+    
     func addFloatingEmojis() {
         let emojis = ["✨", "🌟", "🎮", "🏆", "💡", "🎯", "👍", "❤️", "🔥"]
         
@@ -43,15 +44,15 @@ class ViewController: UIViewController {
             
             let startX = CGFloat.random(in: 20..<(view.bounds.width - 20))
             emojiLabel.frame = CGRect(x: startX,
-                                    y: view.bounds.height + 50,
-                                    width: 30,
-                                    height: 30)
+                                      y: view.bounds.height + 50,
+                                      width: 30,
+                                      height: 30)
             view.addSubview(emojiLabel)
             view.sendSubviewToBack(emojiLabel)
             
             UIView.animate(withDuration: Double.random(in: 8...12),
-                          delay: Double.random(in: 0...2),
-                          options: [.repeat, .curveLinear]) {
+                           delay: Double.random(in: 0...2),
+                           options: [.repeat, .curveLinear]) {
                 let endX = startX + CGFloat.random(in: -50...50)
                 emojiLabel.frame.origin = CGPoint(
                     x: endX,
@@ -62,8 +63,8 @@ class ViewController: UIViewController {
             }
             
             UIView.animate(withDuration: 2,
-                          delay: 0,
-                          options: [.autoreverse, .repeat]) {
+                           delay: 0,
+                           options: [.autoreverse, .repeat]) {
                 emojiLabel.alpha = 0.3
             }
         }
