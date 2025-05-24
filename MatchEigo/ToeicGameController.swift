@@ -23,7 +23,7 @@ class ToeicGameController: UIViewController {
     
     @IBOutlet weak var answerStackView: UIStackView!
     
-    // MARK: - Properties
+
     private let realm = try! Realm()
     private var currentUser: UserScore?
     
@@ -181,42 +181,48 @@ class ToeicGameController: UIViewController {
         
         let selectedEnglish = (questionButton.titleLabel?.text)!
         let selectedJapanese = (answerButton.titleLabel?.text)!
-        
-        // Check if this is a correct pair
+     
         if currentRoundPairs.contains(where: { $0 == (selectedEnglish, selectedJapanese) }) {
+            
             score += 1
             matchedPairs += 1
             questionButton.isEnabled = false
             answerButton.isEnabled = false
+            
             UIView.animate(withDuration: 0.3, animations: {
                 questionButton.backgroundColor = .systemGreen
                 answerButton.backgroundColor = .systemGreen
-            })
-            
-            selectedQuestionButton = nil
-            selectedAnswerButton = nil
-            
-            // Check if round is complete
-            if matchedPairs == 4 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.checkGameProgress()
+            }) { _ in
+                self.selectedQuestionButton = nil
+                self.selectedAnswerButton = nil
+                
+                // Check if round is complete
+                if self.matchedPairs == 4 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.checkGameProgress()
+                    }
                 }
             }
         } else {
-            // Incorrect match - deduct points
             score = max(0, score - 1)
             
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.15, animations: {
+                // Scale up and change color
+                questionButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                answerButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
                 questionButton.backgroundColor = .systemRed
                 answerButton.backgroundColor = .systemRed
             }, completion: { _ in
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.25, delay: 0.1, options: .curveEaseOut, animations: {
+                    questionButton.transform = .identity
+                    answerButton.transform = .identity
                     questionButton.backgroundColor = .systemBlue
                     answerButton.backgroundColor = .systemBlue
-                }
-                // Clear selections after showing wrong match
-                self.selectedQuestionButton = nil
-                self.selectedAnswerButton = nil
+                }, completion: { _ in
+                    // Clear selections
+                    self.selectedQuestionButton = nil
+                    self.selectedAnswerButton = nil
+                })
             })
         }
     }

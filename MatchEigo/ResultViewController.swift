@@ -7,12 +7,10 @@
 
 import UIKit
 import Lottie
-import AVFoundation
 
 
 class ResultViewController: UIViewController {
     private var animationView: LottieAnimationView!
-    var audioPlayer: AVAudioPlayer?
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var emojiLabel: UILabel!

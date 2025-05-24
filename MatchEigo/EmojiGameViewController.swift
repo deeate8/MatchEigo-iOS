@@ -20,7 +20,7 @@ class EmojiGameViewController: UIViewController {
     
     @IBOutlet weak var roundLabel: UILabel!
     
-    
+    @IBOutlet weak var timerLabel: UILabel!
     
     private let realm = try! Realm()
     private var currentUser: UserScore?
@@ -29,6 +29,9 @@ class EmojiGameViewController: UIViewController {
     var emojiPairs = [("", "")]
     var selectedQuestionLabel: UILabel?
     var selectedAnswerLabel: UILabel?
+    let timerService = TimerService.shared
+    var elapsedTime: Double = 0
+    var timer: Timer?
        
     func fetchEmojiPairs() {
             db.collection("emojiPairs").getDocuments { [weak self] snapshot, error in
@@ -127,8 +130,14 @@ class EmojiGameViewController: UIViewController {
     func startNewRound() {
         matchedPairs = 0
         selectedQuestionLabel = nil
+        selectedAnswerLabel = nil // check
+        if currentRound == 1 {
+            timerService.startRound()
+            startLiveTimer()
+        }
         currentRoundPairs = Array(emojiPairs.shuffled().prefix(4))
-            
+
+        
         let questions = currentRoundPairs.map { $0.0 }.shuffled()
         let answers = currentRoundPairs.map { $0.1 }.shuffled()
         
@@ -211,27 +220,30 @@ class EmojiGameViewController: UIViewController {
                 }
             }
         } else {
-            score = max(0, score - 1)
-            UIView.animate(withDuration: 0.3, animations: {
-                questionLabel.backgroundColor = .systemRed
-                answerLabel.backgroundColor = .systemRed
-                questionLabel.layer.borderColor = UIColor.systemRed.cgColor
-                answerLabel.layer.borderColor = UIColor.systemRed.cgColor
-                questionLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                answerLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            }, completion: { _ in
-                UIView.animate(withDuration: 1) {
-                    questionLabel.backgroundColor = .systemBlue
-                    answerLabel.backgroundColor = .systemBlue
-                    self.clearSelection()
+            // Wrong match
+                    score = max(0, score - 1)
+                    
+                    UIView.animate(withDuration: 0.15, animations: {
+                        // Scale up
+                        questionLabel.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                        answerLabel.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                        questionLabel.backgroundColor = .systemRed
+                        answerLabel.backgroundColor = .systemRed
+                        questionLabel.layer.borderColor = UIColor.systemRed.cgColor
+                        answerLabel.layer.borderColor = UIColor.systemRed.cgColor
+                    }, completion: { _ in
+                        UIView.animate(withDuration: 0.25, delay: 0.1, options: .curveEaseOut, animations: {
+                            // Scale back down
+                            questionLabel.transform = .identity
+                            answerLabel.transform = .identity
+                            questionLabel.backgroundColor = .systemBlue
+                            answerLabel.backgroundColor = .systemBlue
+                        }, completion: { _ in
+                            self.clearSelection()
+                        })
+                    })
                 }
-                self.selectedQuestionLabel?.layer.borderWidth = 0
-                self.selectedAnswerLabel?.layer.borderWidth = 0
-                self.selectedQuestionLabel = nil
-                self.selectedAnswerLabel = nil
-            })
-        }
-    }
+            }
     private func clearSelection() {
         // Remove all selection styling
         selectedQuestionLabel?.layer.borderWidth = 0
@@ -245,14 +257,17 @@ class EmojiGameViewController: UIViewController {
             currentRound += 1
             startNewRound()
         } else {
+            let totalTime = timerService.endRound()
+            stopTimer()
             // Game over, show results
-            showResults()
+            showResults(with: totalTime)
         }
     }
-    func showResults() {
+    func showResults(with totalTime: Double) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let resultsVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
             resultsVC.finalScore = score
+            resultsVC.totalTime = totalTime
             resultsVC.gameViewController = self
             resultsVC.modalPresentationStyle = .fullScreen
             present(resultsVC, animated: true)
@@ -289,9 +304,34 @@ class EmojiGameViewController: UIViewController {
         matchedPairs = 0
         selectedQuestionLabel = nil
         selectedAnswerLabel = nil
+        stopTimer()
         
         // Start fresh 5 rounds
-        setupEmojiGame()
+        setupEmojiGame() // check
+        startNewRound()
         emojiPairs.shuffle()
+    }
+    func startLiveTimer() {
+        timer?.invalidate() // Cancel any existing timer
+        elapsedTime = 0
+        updateTimerLabel() // Update immediately
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.elapsedTime += 0.1
+            self.updateTimerLabel()
+        }
+    }
+    func updateTimerLabel() {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        timerLabel.text = formatter.string(from: elapsedTime)
+    }
+
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 }
