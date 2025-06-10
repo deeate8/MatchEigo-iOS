@@ -175,9 +175,10 @@ class ToeicGameController: UIViewController {
     
     func checkForMatch() {
         guard let questionButton = selectedQuestionButton,
-              let answerButton = selectedAnswerButton,
-              let questionIndex = questionsStackView.arrangedSubviews.firstIndex(of: questionButton),
-              let answerIndex = answerStackView.arrangedSubviews.firstIndex(of: answerButton) else { return }
+              let answerButton = selectedAnswerButton else { return }
+//              let questionIndex = questionsStackView.arrangedSubviews.firstIndex(of: questionButton),
+              /*let answerIndex = answerStackView.arrangedSubviews.firstIndex(of: answerButton)*/
+        
         
         let selectedEnglish = (questionButton.titleLabel?.text)!
         let selectedJapanese = (answerButton.titleLabel?.text)!
